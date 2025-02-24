@@ -1,0 +1,11 @@
+langchain
+langchain-core
+langchain-huggingface
+langchain-community
+huggingface_hub
+transformers
+accelerate
+bitsandbytes
+google-search-results
+gradio
+python-dotenv
