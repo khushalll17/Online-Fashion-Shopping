@@ -36,16 +36,25 @@ from langchain.output_parsers import RegexParser
 from langchain.agents import AgentOutputParser
 from langchain.schema import AgentAction, AgentFinish
 from langchain.utilities import SerpAPIWrapper
+from dotenv import load_dotenv
 
-from google.colab import userdata
-HUGGING_FACE = userdata.get('HuggingAPI')
-SERPAPI = userdata.get('SerpApi')
+load_dotenv()
+# from google.colab import userdata
+# HUGGING_FACE = userdata.get('HuggingAPI')
+# SERPAPI = userdata.get('SerpApi')
 
-os.environ["HUGGINGFACEHUB_API_TOKEN"]= HUGGING_FACE
-os.environ["SERPAPI_API_KEY"] = SERPAPI
+# os.environ["HUGGINGFACEHUB_API_TOKEN"]= HUGGING_FACE
+# os.environ["SERPAPI_API_KEY"] = SERPAPI
+
+# model_name = "deepseek-ai/DeepSeek-R1"
+# serp_api_key = os.getenv(SERPAPI)
 
 model_name = "deepseek-ai/DeepSeek-R1"
-serp_api_key = os.getenv(SERPAPI)
+serp_api_key = os.getenv("SERPAPI")
+HuggingFace = os.getenv("HuggingFace")
+
+os.environ["HUGGINGFACEHUB_API_TOKEN"]= HuggingFace
+os.environ["SERPAPI_API_KEY"] = serp_api_key
 
 # Ignore all FutureWarning messages from the 'huggingface_hub' module
 warnings.filterwarnings('ignore', category=FutureWarning, module='huggingface_hub')
@@ -293,8 +302,8 @@ def run_shopping_assistant(query):
         print("Please check your configuration and try again.")
 
 #Testing Code
-query = input("\nYour query: ")
-run_shopping_assistant(query)
+# query = input("\nYour query: ")
+# run_shopping_assistant(query)
 
 import gradio as gr
 
@@ -312,4 +321,4 @@ iface = gr.Interface(
 )
 
 # Launch the app
-iface.launch()
+iface.launch(share=True)
